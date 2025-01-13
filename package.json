@@ -10,7 +10,9 @@
   "author": "Ridwan Rasyid",
   "license": "MIT",
   "dependencies": {
+    "compression": "^1.7.5",
     "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
     "express-yup-middleware": "^1.2.4",
     "helmet": "^8.0.0",
     "http-status-codes": "^2.3.0",
