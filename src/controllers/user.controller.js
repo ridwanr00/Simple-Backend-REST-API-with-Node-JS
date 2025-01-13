@@ -1,5 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import userService from "../services/user.service";
+import pino from "pino";
+
+const logger = pino();
 
 const STATUS = {
   success: "OK",
@@ -11,11 +14,12 @@ const getAllUser = (req, res) => {
   if (users.length) {
     return res.status(StatusCodes.OK).send(users);
   }
+  logger.info('get all users')
   return res.status(StatusCodes.NOT_FOUND).send({
     status: STATUS.failure,
     message: "No users found.",
   });
-}
+};
 
 const getUser = (req, res) => {
   const id = parseInt(req.params.id);
@@ -27,31 +31,35 @@ const getUser = (req, res) => {
       data: user,
     });
   }
+  logger.info(`get user ${id}`)
   return res.status(StatusCodes.NOT_FOUND).send({
     status: STATUS.failure,
     message: `User ${id} is not found`,
   });
-}
+};
 
 const addUser = (req, res) => {
-    const { body: user } = req;
+  const { body: user } = req;
 
   const addedUser = userService.addUser(user);
+  
+  logger.info('add user')
 
   return res.status(StatusCodes.CREATED).send({
     status: STATUS.success,
     message: addedUser,
   });
-}
+};
 
 const updateUser = (req, res) => {
-    const { body: user } = req;
+  const { body: user } = req;
 
   const id = parseInt(req.params.id, 10);
 
   const updatedUser = userService.updateUser(id, user);
 
   if (updatedUser) {
+    logger.info(`update user ${id}`)
     return res.status(StatusCodes.OK).send({
       status: STATUS.success,
       message: updatedUser,
@@ -62,7 +70,7 @@ const updateUser = (req, res) => {
       message: `User ${user.id} not found`,
     });
   }
-}
+};
 
 const removeUser = (req, res) => {
   const { params } = req;
@@ -71,6 +79,7 @@ const removeUser = (req, res) => {
   const deletedUser = userService.removeUser(id);
 
   if (deletedUser == true) {
+    logger.info(`remove user ${id}`);
     return res.status(StatusCodes.OK).send({
       status: STATUS.success,
       message: `User ${id} has been deleted`,
@@ -83,9 +92,9 @@ const removeUser = (req, res) => {
 };
 
 export default {
-    getAllUser,
-    getUser,
-    addUser,
-    updateUser,
-    removeUser
-}
+  getAllUser,
+  getUser,
+  addUser,
+  updateUser,
+  removeUser,
+};
