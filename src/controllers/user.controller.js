@@ -12,9 +12,9 @@ const STATUS = {
 const getAllUser = (req, res) => {
   const users = userService.getAllUser();
   if (users.length) {
+    logger.info('get all users')
     return res.status(StatusCodes.OK).send(users);
   }
-  logger.info('get all users')
   return res.status(StatusCodes.NOT_FOUND).send({
     status: STATUS.failure,
     message: "No users found.",
@@ -26,12 +26,12 @@ const getUser = (req, res) => {
   const user = userService.getUser(id);
 
   if (user) {
+    logger.info(`get user ${id}`)
     return res.status(StatusCodes.OK).send({
       status: STATUS.success,
       data: user,
     });
   }
-  logger.info(`get user ${id}`)
   return res.status(StatusCodes.NOT_FOUND).send({
     status: STATUS.failure,
     message: `User ${id} is not found`,
