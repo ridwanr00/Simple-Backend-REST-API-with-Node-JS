@@ -5,8 +5,8 @@ import pino from "pino";
 const logger = pino();
 
 const STATUS = {
-  success: "OK",
-  failure: "NO",
+  success: true,
+  failure: false,
 };
 
 const getAllUser = (req, res) => {
@@ -28,8 +28,8 @@ const getUser = (req, res) => {
   if (user) {
     logger.info(`get user ${id}`)
     return res.status(StatusCodes.OK).send({
-      status: STATUS.success,
-      data: user,
+      status: StatusCodes.OK,
+      user
     });
   }
   return res.status(StatusCodes.NOT_FOUND).send({
