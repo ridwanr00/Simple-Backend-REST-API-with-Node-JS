@@ -28,36 +28,38 @@ const UsersList = () => {
 
   return (
     <Layout>
-      <h3 className="text-center mb-3 fw-bold">Users</h3>
       {errorMessage
         ? (
         <h3 className="text-center text-danger fw-bold">{errorMessage}</h3>
           )
         : (
-            Object.values(users).map((user) => (
-          <Row className="justify-content-center" key={user.id}>
-            <Col lg={4}>
-              <Card>
-                <Card.Body>
-                  <h4>{user.name}</h4>
-                  <p>{user.email}</p>
-                  {user.city && user.country && (
-                    <p>
-                      {user.city} - {user.country}
-                    </p>
-                  )}
-                  <Button
-                    variant="secondary"
-                    as={NavLink}
-                    to={`edit/${user.id}`}
-                  >
-                    Edit User
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-            ))
+        <>
+          <h3 className="text-center mb-3 fw-bold">Users</h3>
+          {Object.values(users).map((user) => (
+            <Row className="justify-content-center" key={user.id}>
+              <Col lg={4}>
+                <Card>
+                  <Card.Body>
+                    <h4>{user.name}</h4>
+                    <p>{user.email}</p>
+                    {user.city && user.country && (
+                      <p>
+                        {user.city} - {user.country}
+                      </p>
+                    )}
+                    <Button
+                      variant="secondary"
+                      as={NavLink}
+                      to={`edit/${user.id}`}
+                    >
+                      Edit User
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          ))}
+        </>
           )}
     </Layout>
   )
