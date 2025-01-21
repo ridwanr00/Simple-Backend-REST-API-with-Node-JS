@@ -7,6 +7,11 @@
     "start": "nodemon --exec babel-node src/server.js",
     "test": "ava"
   },
+  "ava": {
+    "require": [
+      "@babel/register"
+    ]
+  },
   "author": "Ridwan Rasyid",
   "license": "MIT",
   "dependencies": {
