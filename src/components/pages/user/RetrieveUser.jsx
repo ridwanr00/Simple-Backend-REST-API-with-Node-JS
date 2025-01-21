@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Col } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import Layout from '../layout/Layout'
-import userService from '../../services/user.service'
+import Layout from '../../layout/Layout'
+import userService from '../../../services/user.service'
 
 const RetrieveUser = () => {
   const { userId } = useParams()

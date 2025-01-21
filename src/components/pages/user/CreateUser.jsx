@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
-import Layout from '../layout/Layout'
-import userService from '../../services/user.service'
+import Layout from '../../layout/Layout'
+import userService from '../../../services/user.service'
+import { firstUpperCase } from '../../../helpers/string.helper'
 
 const CreateUser = () => {
   const [name, setName] = useState('')
@@ -21,8 +22,8 @@ const CreateUser = () => {
     }
 
     try {
-      const user = await userService.createUser(payload)
-      if (user) {
+      const response = await userService.createUser(payload)
+      if (response?.status) {
         toast.success('User successfully created')
         setName('')
         setEmail('')
@@ -37,7 +38,8 @@ const CreateUser = () => {
           errors: { body }
         }
       } = err.response
-      toast.error(body[0]?.message)
+      const message = body[0]?.message
+      toast.error(firstUpperCase(message))
     }
   }
   return (
@@ -49,7 +51,8 @@ const CreateUser = () => {
                 <Form.Label>Name</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Name"
+                  placeholder='Name'
+                  value={name}
                   onChange={(e) => setName(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -57,7 +60,8 @@ const CreateUser = () => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Email"
+                  placeholder='Email'
+                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -65,7 +69,8 @@ const CreateUser = () => {
                 <Form.Label>City</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="City"
+                  placeholder='City'
+                  value={city}
                   onChange={(e) => setCity(e.target.value)}
                 ></Form.Control>
               </Form.Group>
@@ -73,7 +78,8 @@ const CreateUser = () => {
                 <Form.Label>Country</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Country"
+                  placeholder='Country'
+                  value={country}
                   onChange={(e) => setCountry(e.target.value)}
                 ></Form.Control>
               </Form.Group>

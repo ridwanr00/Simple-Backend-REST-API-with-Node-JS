@@ -9,7 +9,9 @@ const TopNavigation = () => {
                 <Container>
                     <Navbar.Brand as={NavLink} to={'/'}>Simple Client</Navbar.Brand>
                     <Nav className='flex-grow-1 justify-content-end'>
-                        <Nav.Link as={NavLink} to={'/create'}>Create User</Nav.Link>
+                        <Nav.Link as={NavLink} to={'/create'} className='fw-bold'>
+                        Create User
+                        </Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

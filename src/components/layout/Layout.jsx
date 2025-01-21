@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap'
 import { ToastContainer } from 'react-toastify'
 import TopNavigation from './TopNavigation'
 import { createGlobalStyle } from 'styled-components'
+import Footer from './Footer'
 
 const BackgroundColor = createGlobalStyle`
   body{
@@ -20,6 +21,7 @@ const Layout = ({ children }) => {
                 <TopNavigation></TopNavigation>
                 <Container className='mt-5'>{children}</Container>
             </Container>
+            <Footer></Footer>
         </>
   )
 }
